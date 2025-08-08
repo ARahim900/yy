@@ -12,7 +12,7 @@ import { StpPlant } from './pages/StpPlant';
 import { Page } from './constants';
 
 const App: React.FC = () => {
-  const [activePage, setActivePage] = useState<Page>('Water System');
+  const [activePage, setActivePage] = useState<Page>('HVAC System');
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -34,7 +34,7 @@ const App: React.FC = () => {
       case 'STP Plant':
         return <StpPlant />;
       default:
-        return <WaterSystem />;
+        return <HvacSystem />;
     }
   };
 
