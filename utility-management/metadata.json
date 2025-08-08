@@ -1,0 +1,6 @@
+{
+  "name": "Utility Management Dashboard",
+  "description": "A comprehensive dashboard for managing and analyzing utility systems including water, electricity, HVAC, and more. Provides real-time data, trend analysis, and maintenance tracking.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

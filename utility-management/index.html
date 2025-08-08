@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utility Management Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --background: 0 0% 97.3%; /* #f8f8f8 */
+        --foreground: 0 0% 20.4%; /* #343434 */
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 20.4%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 20.4%;
+        --primary: 261 13% 30%; /* #4E4456 */
+        --primary-foreground: 210 40% 98%;
+        --secondary: 175 47% 90%; /* #D6F3F0 */
+        --secondary-foreground: 175 40% 25%; /* #26665F */
+        --muted: 0 0% 63.9%;
+        --muted-foreground: 0 0% 45.1%;
+        --accent: 130 40% 85.1%; /* #B6E6BD */
+        --accent-foreground: 129 41% 25%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 0 0% 89.8%; /* #e5e5e5 */
+        --input: 0 0% 93.3%;
+        --ring: 261 13% 40%;
+        --radius: 0.5rem;
+
+        /* Chart Colors */
+        --chart-1: 271 22% 53%; /* #8A6F9E */
+        --chart-2: 24 96% 57%; /* #F76F1A */
+        --chart-3: 31 56% 64%; /* #D4A87C */
+        --chart-4: 117 48% 75%; /* #A7D9A5 */
+        --chart-5: 213 36% 58%; /* #6C8EBF */
+        --chart-6: 310 32% 68%; /* #C193C8 */
+        --warning: 38 92% 50%;
+      }
+
+      .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 10%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 261 13% 45%; /* Lighter purple for dark mode */
+        --primary-foreground: 0 0% 98%;
+        --secondary: 175 47% 20%; /* #1B4A46 */
+        --secondary-foreground: 175 47% 90%; /* #D6F3F0 */
+        --muted: 240 4% 30%;
+        --muted-foreground: 240 5% 65%;
+        --accent: 130 40% 35%; /* Darker mint for dark mode */
+        --accent-foreground: 130 40% 90%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 10% 20%;
+        --input: 240 10% 20%;
+        --ring: 261 13% 55%;
+        --warning: 45 93% 57%;
+      }
+
+      body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              border: 'hsl(var(--border))',
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+              background: 'hsl(var(--background))',
+              foreground: 'hsl(var(--foreground))',
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                foreground: 'hsl(var(--primary-foreground))',
+              },
+              secondary: {
+                DEFAULT: 'hsl(var(--secondary))',
+                foreground: 'hsl(var(--secondary-foreground))',
+              },
+              destructive: {
+                DEFAULT: 'hsl(var(--destructive))',
+                foreground: 'hsl(var(--destructive-foreground))',
+              },
+              muted: {
+                DEFAULT: 'hsl(var(--muted))',
+                foreground: 'hsl(var(--muted-foreground))',
+              },
+              accent: {
+                DEFAULT: 'hsl(var(--accent))',
+                foreground: 'hsl(var(--accent-foreground))',
+              },
+              popover: {
+                DEFAULT: 'hsl(var(--popover))',
+                foreground: 'hsl(var(--popover-foreground))',
+              },
+              card: {
+                DEFAULT: 'hsl(var(--card))',
+                foreground: 'hsl(var(--card-foreground))',
+              },
+              warning: 'hsl(var(--warning))',
+              chart: {
+                1: 'hsl(var(--chart-1))',
+                2: 'hsl(var(--chart-2))',
+                3: 'hsl(var(--chart-3))',
+                4: 'hsl(var(--chart-4))',
+                5: 'hsl(var(--chart-5))',
+                6: 'hsl(var(--chart-6))',
+              }
+            },
+            borderRadius: {
+              lg: `var(--radius)`,
+              md: `calc(var(--radius) - 2px)`,
+              sm: 'calc(var(--radius) - 4px)',
+            },
+            boxShadow: {
+              card: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+              'card-hover': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+            },
+          },
+        },
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "recharts": "https://esm.sh/recharts@2.12.7",
+    "@google/genai": "https://esm.sh/@google/genai",
+    "@radix-ui/react-slider": "https://esm.sh/@radix-ui/react-slider@1.1.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
