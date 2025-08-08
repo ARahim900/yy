@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.1.1",
-    "recharts": "2.12.7",
     "@google/genai": "latest",
     "@radix-ui/react-slider": "1.1.2",
-    "react-dom": "^19.1.1"
+    "@types/recharts": "^1.8.29",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "recharts": "^3.0.0-alpha.9"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
